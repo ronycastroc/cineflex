@@ -1,7 +1,12 @@
-export default function Movies({ id, overview, posterURL, releaseDate, title}) {
-    return (
-        <div className="movie">
-            <img src={posterURL} alt="poster" />
-        </div>
+import { Link } from 'react-router-dom'
+
+export default function Movies({ movieID, overview, posterURL, releaseDate, title}) {
+ 
+    return (        
+        <Link to={`/movie/${movieID}`}>
+            <div className="movie">
+                <img src={posterURL} alt="poster" />
+            </div>
+        </Link>
     )
 }

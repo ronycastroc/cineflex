@@ -8,9 +8,9 @@ export default function MainPage() {
     useEffect(() => {
         const promise = axios.get('https://mock-api.driven.com.br/api/v5/cineflex/movies')
 
-        promise.then(response => {
-            setMovies(response.data)
-            
+        promise.then(res => {
+            setMovies(res.data)
+            console.log(res.data)
         })
     }, [])
 
@@ -22,7 +22,7 @@ export default function MainPage() {
 
             <div className="content">
                 {movies.map((value, index) => (
-                    <Movies key={index} id={value.id} overview={value.overview} posterURL={value.posterURL} releaseDate={value.releaseDate} title={value.title}/>
+                    <Movies key={index} movieID={value.id} overview={value.overview} posterURL={value.posterURL} releaseDate={value.releaseDate} title={value.title}/>
                 ))}
                 
             </div>
