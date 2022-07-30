@@ -3,6 +3,7 @@ import Header from './Header'
 import MainPage from './MainPage'
 import TimeTable from './TimeTable'
 import Section from './Section'
+import Sucess from './Sucess'
 
 export default function App() {
     return (
@@ -12,6 +13,7 @@ export default function App() {
                 <Route path='/' element={<MainPage />}/>
                 <Route path='/movie/:movieID' element={<TimeTable />}/>
                 <Route path='/section/:sectionID' element={<Section />}/>
+                <Route path='/sucess' element={<Sucess />}/>
             </Routes>
         </BrowserRouter>
     )
