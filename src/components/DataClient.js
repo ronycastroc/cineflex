@@ -2,33 +2,37 @@ import axios from "axios"
 import { useState } from "react"
 import { useNavigate } from "react-router-dom";
 
-export default function DataClient() {
+export default function DataClient({info, hour, date, ids, place}) {
+    const movie = info.title
     const [name, setName] = useState('')
     const [cpf, setCpf] = useState('')
-
     
+    const navigate = useNavigate()
+    
+    console.log()
 
-    function HandleForm(e) {
-        
-        const navigate = useNavigate()
+    function handleForm(e) {       
 
         e.preventDefault()
         
         const body = {
+            ids,
             name,
             cpf
         }
 
     const promise = axios.post('https://mock-api.driven.com.br/api/v7/cineflex/seats/book-many', body)
 
-    navigate('./sucess', {name, cpf})
+    
 
-    promise.then(() =>
+    promise.then(() => {
+        navigate('/sucess', {replace: true, state: {name, cpf, movie, hour, date, place}}) 
         resetForm()
-    )
-
+    })  
     
 }
+
+    
 
 function resetForm() {
     setName('')
@@ -37,7 +41,7 @@ function resetForm() {
 
     return (
         <div className="client-box">
-            <form onSubmit={HandleForm}>
+            <form onSubmit={handleForm}>
                 <div className="imput-group">
                     <p>Nome do Comprador</p>
                     
@@ -55,7 +59,7 @@ function resetForm() {
 
                     <input 
                     type="text" placeholder="Digite seu CPF"
-                    onChange={(e) => setCpf(e.eventPhase.value)}
+                    onChange={(e) => setCpf(e.target.value)}
                     value={cpf}
                     required
                     />

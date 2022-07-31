@@ -1,6 +1,6 @@
 import { useState } from "react"
 
-export default function Seat({seatID, name, available, number, setNumber}) {
+export default function Seat({seatID, name, available, number, setNumber, place, setPlace}) {
     const [select, setSelect] = useState('seat')
 
     return (
@@ -9,17 +9,23 @@ export default function Seat({seatID, name, available, number, setNumber}) {
                 <div className={select} onClick={() => {
                     
                     if(select === 'seat') {
-                        const newNumber = [...number, name]
                         setSelect('seat green')
+                        const newNumber = [...number, Number(seatID)]
                         setNumber(newNumber)
+                        const newPlace = [...place, name]
+                        setPlace(newPlace)
                     }
 
                     else {
                         setSelect('seat')
                         const newNumber = number.slice(0, number.length -1)
                         setNumber(newNumber)
+                        const newPlace = place.slice(0, place.length -1)
+                        setPlace(newPlace)
                     }                          
                 console.log(number)
+                console.log(place)
+
                 }}>
                     <p className="num">{name} </p>
                 </div>) : 

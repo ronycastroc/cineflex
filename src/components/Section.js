@@ -8,10 +8,13 @@ import DataClient from "./DataClient"
 
 
 export default function Section() {    
+    const [hour, setHour] = useState([])
     const [day, setDay] = useState([])
     const [movie, setMovie] = useState([])
     const [seats, setSeats] = useState([])
     const [number, setNumber] = useState([])
+    const [place, setPlace] = useState([])
+
 
     const { sectionID } = useParams()
 
@@ -22,6 +25,7 @@ export default function Section() {
             setDay(res.data.day)
             setMovie(res.data.movie)
             setSeats(res.data.seats)
+            setHour(res.data.name)
             console.log(res.data)
         })
     }, [])
@@ -35,14 +39,14 @@ export default function Section() {
             <div className="seats">
                 
                {seats.map((value, index) => (
-                <Seat key={index} seatID={value.id} name={value.name} available={value.isAvailable} number={number} setNumber={setNumber}/>
+                <Seat key={index} seatID={value.id} name={value.name} available={value.isAvailable} number={number} setNumber={setNumber} place={place} setPlace={setPlace}/>
                ))}
                
             </div>
 
             <Subtitle />
 
-            <DataClient />
+            <DataClient info={movie} hour={hour} week={day.weekday} date={day.date} ids={number} place={place}/>
 
             <Footer info={movie} week={day.weekday} date={day.date}/>
         </>
