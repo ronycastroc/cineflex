@@ -2,18 +2,25 @@ import axios from "axios"
 import { useState } from "react"
 import { useNavigate } from "react-router-dom";
 
-export default function DataClient({info, hour, date, ids, place}) {
+export default function DataClient({info, hour, date, ids, place, valid}) {
     const movie = info.title
     const [name, setName] = useState('')
     const [cpf, setCpf] = useState('')
     
     const navigate = useNavigate()
     
-    console.log()
-
+    
     function handleForm(e) {       
 
         e.preventDefault()
+
+        if(valid === false) {
+            alert('Selecione um assento antes de prosseguir.')
+        }
+
+        else {
+            
+            
         
         const body = {
             ids,
@@ -30,14 +37,15 @@ export default function DataClient({info, hour, date, ids, place}) {
         resetForm()
     })  
     
-}
+}    
 
-    
-
-function resetForm() {
-    setName('')
-    setCpf('')
-}
+    function resetForm() {
+        setName('')
+        setCpf('')
+    }
+        }
+        
+        
 
     return (
         <div className="client-box">

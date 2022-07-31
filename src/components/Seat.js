@@ -1,6 +1,6 @@
 import { useState } from "react"
 
-export default function Seat({seatID, name, available, number, setNumber, place, setPlace}) {
+export default function Seat({seatID, name, available, number, setNumber, place, setPlace, valid, setValid}) {
     const [select, setSelect] = useState('seat')
 
     return (
@@ -14,6 +14,7 @@ export default function Seat({seatID, name, available, number, setNumber, place,
                         setNumber(newNumber)
                         const newPlace = [...place, name]
                         setPlace(newPlace)
+                        setValid(true)
                     }
 
                     else {
@@ -22,6 +23,7 @@ export default function Seat({seatID, name, available, number, setNumber, place,
                         setNumber(newNumber)
                         const newPlace = place.slice(0, place.length -1)
                         setPlace(newPlace)
+                        setValid(false)
                     }                          
                 console.log(number)
                 console.log(place)
@@ -31,7 +33,9 @@ export default function Seat({seatID, name, available, number, setNumber, place,
                 </div>) : 
                 
                 (
-                <div className="seat yellow">
+                <div className="seat yellow" onClick={() => {
+                    alert('Este assento não está disponível')
+                }}>
                     <p className="num">{name}</p>
                 </div>
                 )}

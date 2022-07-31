@@ -14,6 +14,7 @@ export default function Section() {
     const [seats, setSeats] = useState([])
     const [number, setNumber] = useState([])
     const [place, setPlace] = useState([])
+    const [valid, setValid] = useState(false)
 
 
     const { sectionID } = useParams()
@@ -25,9 +26,9 @@ export default function Section() {
             setDay(res.data.day)
             setMovie(res.data.movie)
             setSeats(res.data.seats)
-            setHour(res.data.name)
-            console.log(res.data)
+            setHour(res.data.name)           
         })
+        // eslint-disable-next-line
     }, [])
 
     return (
@@ -39,14 +40,14 @@ export default function Section() {
             <div className="seats">
                 
                {seats.map((value, index) => (
-                <Seat key={index} seatID={value.id} name={value.name} available={value.isAvailable} number={number} setNumber={setNumber} place={place} setPlace={setPlace}/>
+                <Seat key={index} seatID={value.id} name={value.name} available={value.isAvailable} number={number} setNumber={setNumber} place={place} setPlace={setPlace} valid={valid} setValid={setValid}/>
                ))}
                
             </div>
 
             <Subtitle />
 
-            <DataClient info={movie} hour={hour} week={day.weekday} date={day.date} ids={number} place={place}/>
+            <DataClient info={movie} hour={hour} week={day.weekday} date={day.date} ids={number} place={place} valid={valid}/>
 
             <Footer info={movie} week={day.weekday} date={day.date}/>
         </>
